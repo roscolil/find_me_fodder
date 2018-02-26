@@ -1,9 +1,14 @@
-$test: red;
-
-.weak {
-  color: $test;
+div {
+  display: inline;
+  text-align: center;
 }
 
-.good {
-  color: green;
+input {
+  width: 400px;
+  height: 40px;
+  font-size: 20px;
+}
+
+.button {
+  width: 90px;
 }

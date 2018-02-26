@@ -1,5 +1,6 @@
 import React from 'react'
 import SearchInput from './SearchInput'
+import DisplayResults from './DisplayResults'
 
 export default class App extends React.Component {
 
@@ -9,8 +10,20 @@ export default class App extends React.Component {
 
   render() {
     return <div>
-      <h1>Find Me Fodder</h1>
-      <SearchInput />
+      <div>
+        <h1>Find me Fodder</h1>
+      </div>
+      <br/>
+      <div>
+        <SearchInput/>
+      </div>
+      <br/>
+      <br/>
+      <hr/>
+      <div>
+        <DisplayResults/>
+      </div>
+
     </div>
   }
 }

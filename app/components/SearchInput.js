@@ -17,10 +17,12 @@ export default class SearchInput extends React.Component {
   }
 
   inputChange(e) {
-    this.setState({ cuisine: e.target.value });
+    this.setState({
+      cuisine: e.target.value
+    });
   }
 
-  search: function(e) {
+  searchFunction(e) {
     this.setState({
       operation: 'Checking location..'
     });
@@ -33,11 +35,11 @@ export default class SearchInput extends React.Component {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
       var url = `https://developers.zomato.com/api/v2.1/search?start=0&count=10&lat=${lat}&lon=${lon}&radius=5000&cuisines=${this.state.cuisine}`;
-      $ajax({
+      $.ajax({
         url: url,
         type: 'GET',
         beforeSend: function(request) {
-          request.setRequestHeader('user-key', localStorage.getItem('zomato-api-key'));
+          request.setRequestHeader('user-key', '1e35415e3b9627ff3ad8ace342afde9c');
         },
         success: function(result) {
           this.setState({
@@ -46,16 +48,16 @@ export default class SearchInput extends React.Component {
           })
         }
       })
-    });
+    })
   }
 
   render() {
     return <div>
       <div>
-      <input type="text" placeholder="cuisine" id="cuisine" value={this.state.cuisine}
+        <input type="text" placeholder="cuisine" id="cuisine" value={this.state.cuisine}
         onChange={this.inputChange} />
-    </div>
-      <input className="button" type="button" value={this.state.action} onClick={this.search}></input>
+        <input className="button" type="button" value={this.state.action} onClick={this.searchFunction}></input>
+      </div>
     </div>
   }
 }
