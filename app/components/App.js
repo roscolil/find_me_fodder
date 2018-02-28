@@ -12,6 +12,7 @@ export default class App extends React.Component {
       cuisine: '',
       nearbyRestaurants: [],
       operation: '',
+      noOfResults: 0,
       headers: {
         headers: {'user-key': '1e35415e3b9627ff3ad8ace342afde9c'}
       },
@@ -72,7 +73,6 @@ export default class App extends React.Component {
             <input type="text" placeholder="Cuisine" id="cuisine__field" value={this.state.cuisine} onChange={this.inputChange}></input>
             <button  onClick={this.clickSearch}>Search</button>
             <br></br>
-            <p>{this.state.operation}</p>
           </div>
               <br></br>
               <div className="select__boxes">
@@ -91,17 +91,19 @@ export default class App extends React.Component {
                   <option value="cost">Cost</option>
                 </select>
               </div>
+              <p>{this.state.operation}</p>
               <hr></hr>
         </header>
 
         <main>
             <div>
               { results.map(function(resultObj, index) {
-                var item = resultObj.restaurant
+                let item = resultObj.restaurant
+
                 return (
                 <div className="row" key={index}>
                   <div className="image">
-                    <img  src={item.thumb} />
+                    <img src={item.thumb} />
                   </div>
                   <div className="details">
                     <p>Name: <span>{item.name}</span></p>
