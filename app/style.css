@@ -8,10 +8,15 @@ header {
   text-align: center;
 }
 
-#cuisine-field {
+#cuisine__field {
   width: 400px;
   height: 40px;
   font-size: 20px;
+}
+
+.select__boxes {
+  width: 150px;
+  text-align: left;
 }
 
 .row {

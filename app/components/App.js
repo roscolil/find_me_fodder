@@ -1,7 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-import InfiniteScroll from 'react-infinite-scroller'
-
 
 export default class App extends React.Component {
 
@@ -17,7 +15,9 @@ export default class App extends React.Component {
       headers: {
         headers: {'user-key': '1e35415e3b9627ff3ad8ace342afde9c'}
       },
-      resultOffset: 0
+      resultOffset: 0,
+      distance: 0,
+      sort: ''
     }
   }
 
@@ -38,7 +38,7 @@ export default class App extends React.Component {
       let header = this.state.headers
       let searchRadius = 5000
       // let resultOffset = 0
-      let url =  `https://developers.zomato.com/api/v2.1/search?start=${this.state.resultOffset}&count=10&lat=${lat}&lon=${lon}&radius=5000&q=${this.state.cuisine}`;
+      let url =  `https://developers.zomato.com/api/v2.1/search?start=${this.state.resultOffset}&count=10&lat=${lat}&lon=${lon}&radius=5000&q=${this.state.cuisine}&sort=${this.state.sort}`;
 
 
       this.setState({
@@ -50,25 +50,16 @@ export default class App extends React.Component {
           this.setState({
             operation: 'Here are your results!',
             nearbyRestaurants: res.data.restaurants,
-            resultOffset: resultOffset + 10
+            resultOffset: this.state.resultOffset + 10
           })
         })
-        // resultOffset += 10
-
-        // infiniteScroll() {
-        //   resultOffset += 10
-        //   let url2 = `https://developers.zomato.com/api/v2.1/search?start=${String(resultOffset)}&count=10&lat=${lat}&lon=${lon}&radius=${searsearchRadius}&q=${this.state.cuisine}`;
-        //   axios.get(url2, header)
-        //   .then(res => {
-        //     this.setState({
-        //       operation: 'Fetching more results..',
-        //       nearbyRestaurants: res.data.restaurants
-        //     })
-        //   })
-        // }
     })
   }
 
+  topScroll() {
+    document.body.scrollTop = 0
+    document.documentElement.scrollTop = 0
+  }
 
   render() {
     const results = this.state.nearbyRestaurants
@@ -78,12 +69,28 @@ export default class App extends React.Component {
         <header>
           <div>
             <h1>Find my Fodder</h1>
-            <input type="text" placeholder="Cuisine" id="cuisine-field" value={this.state.cuisine} onChange={this.inputChange}></input>
+            <input type="text" placeholder="Cuisine" id="cuisine__field" value={this.state.cuisine} onChange={this.inputChange}></input>
             <button  onClick={this.clickSearch}>Search</button>
             <br></br>
             <p>{this.state.operation}</p>
           </div>
               <br></br>
+              <div className="select__boxes">
+                <label>Distance</label>
+                <select onChange={this.state.distance}>
+                  <option value="500">500m</option>
+                  <option value="1000">1km</option>
+                  <option value="5000">5km</option>
+                  <option value="10000">10km</option>
+                  <option value="20000">20km</option>
+                </select>
+
+                <label>Sort By</label>
+                <select onChange={this.state.sort}>
+                  <option value="rating">Rating</option>
+                  <option value="cost">Cost</option>
+                </select>
+              </div>
               <hr></hr>
         </header>
 
@@ -109,7 +116,7 @@ export default class App extends React.Component {
               })
             }
             </div>
-            <button onClick={this.clickSearch}>More..</button>
+            <button onClick={ () => {this.clickSearch(); this.topScroll()} }>More..</button>
         </main>
       </div>
     )
