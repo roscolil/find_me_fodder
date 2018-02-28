@@ -1,14 +1,14 @@
 
-body {
+/* body {
 background-image: url(./bground.jpeg);
-}
+} */
 
 header {
   display: inline;
   text-align: center;
 }
 
-header input {
+#cuisine-field {
   width: 400px;
   height: 40px;
   font-size: 20px;
