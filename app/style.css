@@ -1,4 +1,32 @@
 
 body {
-  background-color: lightblue;
+background-image: url(./bground.jpeg);
+}
+
+header {
+  display: inline;
+  text-align: center;
+}
+
+header input {
+  width: 400px;
+  height: 40px;
+  font-size: 20px;
+}
+
+.row {
+  margin: 15px 0 15px 50px;
+}
+
+.details p {
+  font-weight: bold;
+  margin: 5px 30px 5px 40px;
+}
+
+.details p span {
+  font-weight: normal;
+}
+
+.image {
+  margin-left: 20px;
 }

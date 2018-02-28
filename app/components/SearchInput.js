@@ -10,6 +10,7 @@ export default class SearchInput extends React.Component {
     super(props)
     this.inputChange = this.inputChange.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
+    // this.searchResturants = this.searchResturants.bind(this);
 
     this.state = {
       cuisine: '',
@@ -60,7 +61,7 @@ export default class SearchInput extends React.Component {
   //     })
   //   })
 
-  // }
+  }
 
   render() {
     return <div>
