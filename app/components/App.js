@@ -69,7 +69,7 @@ export default class App extends React.Component {
     })
   }
 
-  topScroll() {         //append method
+  topScroll() {
     document.body.scrollTop = 0
     document.documentElement.scrollTop = 0
   }
@@ -113,7 +113,9 @@ export default class App extends React.Component {
 
         <main>
             <div>
-              <p className="number__results" style={{visibility: this.state.noOfResults === 0 ? 'hidden' : 'visible' }}>There are <span>{this.state.noOfResults}</span> total matches</p>
+              <p className="number__results" style={{
+                  visibility: this.state.noOfResults === 0 ? 'hidden' : 'visible'
+                }}>There are <span>{this.state.noOfResults}</span> total matches</p>
               { results.map(function(resultObj, index) {
                 let item = resultObj.restaurant
                 return (
@@ -134,7 +136,9 @@ export default class App extends React.Component {
               })
             }
             </div>
-            <button className="more__btn" onClick={ () => {this.clickSearch(); this.topScroll()} }>More...</button>
+            <button className="more__btn" style={{
+                visibility: this.state.noOfResults === 0 ? 'hidden' : 'visible'
+              }} onClick={ () => {this.clickSearch(); this.topScroll()} }>More...</button>
         </main>
       </div>
     )

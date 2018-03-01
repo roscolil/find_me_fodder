@@ -9,9 +9,7 @@ This is a search app designed to locate restaurants (Zomato API) based on the us
 
 The results can be sorted by distance, rating or cost and are displayed 10 at a time.
 
-When the search button is clicked it sends
-
-
+When the search button is clicked it sends the app obtains current position and requests data from the api endpoint. These results are then rendered to the page. A progress message is displayed and the number of results and the 'More' button are hidden when the noOfResults = 0.
 
 
 
@@ -21,3 +19,7 @@ When the search button is clicked it sends
 * Axios HTTP client
 * Zomato developer API
 * Chrome geolocation API
+
+## Things to improve
+* Splash screen while loading results
+* Refactor code for separate/reusable components
