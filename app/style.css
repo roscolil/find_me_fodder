@@ -1,35 +1,50 @@
 
 body {
-background-image: url(./cowbg.jpg);
+background-image: url(./cow-wallpapers.jpg);
 background-size: cover;
 background-attachment: fixed;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+.search__btn {
+  font-size: 15px;
+}
+
+.more__btn {
+  font-size: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: 10px;
 }
 
 header {
   display: flex;
   text-align: center;
   justify-content: center;
-  background-color: white;
-  opacity: 0.6;
-
 }
 
 main {
   color: white;
 }
 
+.header__div {
+  width: 400px;
+}
+
 .progress_msg {
+  color: #9c04bb;
+  font-size: 19px;
+  font-weight: bold;
   text-align: center;
+  margin: 5px 0 15px 0;
 }
 
 .number__results {
   font-size: 20px;
   font-weight: bold;
   margin-left: 50px;
-}
-
-.hidden {
-  display: none;
 }
 
 #cuisine__field {
@@ -39,8 +54,17 @@ main {
 }
 
 .select__boxes {
-  width: 150px;
+  display: flex;
   text-align: left;
+  justify-content: space-between;
+}
+
+.distance__box {
+  width: 150px;
+}
+
+.sort__box {
+  width: 150px;
 }
 
 .row {

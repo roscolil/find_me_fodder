@@ -20,7 +20,7 @@ export default class App extends React.Component {
       },
       resultOffset: 0,
       distance: 500 ,
-      sort: 'rating'
+      sort: 'real_distance'
     }
   }
 
@@ -83,35 +83,37 @@ export default class App extends React.Component {
     return (
       <div>
         <header>
-          <div>
+          <div className="header__div">
             <h1>Find my Fodder</h1>
-            <input type="text" placeholder="Cuisine" id="cuisine__field" value={cuisineInput} onChange={this.inputChange}></input>
+            <input type="text" placeholder="Cuisine" className="cuisine__field" value={cuisineInput} onChange={this.inputChange}></input>
             <div className="select__boxes">
-              <label>Distance</label>
-              <select value={this.state.distance} onChange={this.distanceChange}>
-                <option value="500">500m</option>
-                <option value="1000">1km</option>
-                <option value="5000">5km</option>
-                <option value="10000">10km</option>
-                <option value="20000">20km</option>
-              </select>
-
-              <label>Sort By</label>
-              <select value={this.state.sort} onChange={this.sortChange}>
-                <option value="rating">Rating</option>
-                <option value="cost">Cost</option>
-              </select>
+              <div className="distance__box">
+                <label>Distance</label>
+                <select value={this.state.distance} onChange={this.distanceChange}>
+                  <option value="500">500m</option>
+                  <option value="1000">1km</option>
+                  <option value="5000">5km</option>
+                  <option value="10000">10km</option>
+                  <option value="20000">20km</option>
+                </select>
+              </div>
+              <div className="sort__box">
+                <label>Sort By</label>
+                <select value={this.state.sort} onChange={this.sortChange}>
+                  <option value="real_distance">Distance</option>
+                  <option value="rating">Rating</option>
+                  <option value="cost">Cost</option>
+                </select>
+              </div>
             </div>
-            <button  onClick={this.clickSearch}>Search</button>
-            <br></br>
+            <p className="progress_msg">{this.state.operation}</p>
+            <button className="search__btn" onClick={this.clickSearch}>Search</button>
           </div>
         </header>
-        <br></br>
 
         <main>
-          <p className="progress_msg">{this.state.operation}</p>
             <div>
-              <p hidden={false} className="number__results">There are <span>{this.state.noOfResults}</span> total matches</p>
+              <p className="number__results" style={{visibility: this.state.noOfResults === 0 ? 'hidden' : 'visible' }}>There are <span>{this.state.noOfResults}</span> total matches</p>
               { results.map(function(resultObj, index) {
                 let item = resultObj.restaurant
                 return (
@@ -132,7 +134,7 @@ export default class App extends React.Component {
               })
             }
             </div>
-            <button onClick={ () => {this.clickSearch(); this.topScroll()} }>More..</button>
+            <button className="more__btn" onClick={ () => {this.clickSearch(); this.topScroll()} }>More...</button>
         </main>
       </div>
     )
