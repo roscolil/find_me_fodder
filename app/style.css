@@ -1,11 +1,35 @@
 
-/* body {
-background-image: url(./bground.jpg);
-} */
+body {
+background-image: url(./cowbg.jpg);
+background-size: cover;
+background-attachment: fixed;
+}
 
 header {
-  display: inline;
+  display: flex;
   text-align: center;
+  justify-content: center;
+  background-color: white;
+  opacity: 0.6;
+
+}
+
+main {
+  color: white;
+}
+
+.progress_msg {
+  text-align: center;
+}
+
+.number__results {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 50px;
+}
+
+.hidden {
+  display: none;
 }
 
 #cuisine__field {

@@ -7,6 +7,8 @@ export default class App extends React.Component {
     super(props);
     this.inputChange = this.inputChange.bind(this);
     this.clickSearch = this.clickSearch.bind(this);
+    this.distanceChange = this.distanceChange.bind(this);
+    this.sortChange = this.sortChange.bind(this);
 
     this.state = {
       cuisine: '',
@@ -17,8 +19,8 @@ export default class App extends React.Component {
         headers: {'user-key': '1e35415e3b9627ff3ad8ace342afde9c'}
       },
       resultOffset: 0,
-      distance: 0,
-      sort: ''
+      distance: 500 ,
+      sort: 'rating'
     }
   }
 
@@ -37,10 +39,7 @@ export default class App extends React.Component {
       let lat = position.coords.latitude
       let lon = position.coords.longitude
       let header = this.state.headers
-      let searchRadius = 5000
-      // let resultOffset = 0
-      let url =  `https://developers.zomato.com/api/v2.1/search?start=${this.state.resultOffset}&count=10&lat=${lat}&lon=${lon}&radius=5000&q=${this.state.cuisine}&sort=${this.state.sort}`;
-
+      let url =  `https://developers.zomato.com/api/v2.1/search?start=${this.state.resultOffset}&count=10&lat=${lat}&lon=${lon}&radius=${this.state.distance}&q=${this.state.cuisine}&sort=${this.state.sort}`;
 
       this.setState({
         operation: 'Searching for fodder...'
@@ -51,69 +50,84 @@ export default class App extends React.Component {
           this.setState({
             operation: 'Here are your results!',
             nearbyRestaurants: res.data.restaurants,
-            resultOffset: this.state.resultOffset + 10
+            resultOffset: this.state.resultOffset + 10,
+            noOfResults: res.data.results_found
           })
         })
     })
   }
 
-  topScroll() {
+  distanceChange(e) {
+    this.setState({
+      distance: e.target.value
+    })
+  }
+
+  sortChange(e) {
+    this.setState({
+      sort: e.target.value
+    })
+  }
+
+  topScroll() {         //append method
     document.body.scrollTop = 0
     document.documentElement.scrollTop = 0
   }
 
   render() {
     const results = this.state.nearbyRestaurants
+    const distanceList = this.state.distance
+    const sortList = this.state.sort
+    const cuisineInput = this.state.cuisine
 
     return (
       <div>
         <header>
           <div>
             <h1>Find my Fodder</h1>
-            <input type="text" placeholder="Cuisine" id="cuisine__field" value={this.state.cuisine} onChange={this.inputChange}></input>
+            <input type="text" placeholder="Cuisine" id="cuisine__field" value={cuisineInput} onChange={this.inputChange}></input>
+            <div className="select__boxes">
+              <label>Distance</label>
+              <select value={this.state.distance} onChange={this.distanceChange}>
+                <option value="500">500m</option>
+                <option value="1000">1km</option>
+                <option value="5000">5km</option>
+                <option value="10000">10km</option>
+                <option value="20000">20km</option>
+              </select>
+
+              <label>Sort By</label>
+              <select value={this.state.sort} onChange={this.sortChange}>
+                <option value="rating">Rating</option>
+                <option value="cost">Cost</option>
+              </select>
+            </div>
             <button  onClick={this.clickSearch}>Search</button>
             <br></br>
           </div>
-              <br></br>
-              <div className="select__boxes">
-                <label>Distance</label>
-                <select onChange={this.state.distance}>
-                  <option value="500">500m</option>
-                  <option value="1000">1km</option>
-                  <option value="5000">5km</option>
-                  <option value="10000">10km</option>
-                  <option value="20000">20km</option>
-                </select>
-
-                <label>Sort By</label>
-                <select onChange={this.state.sort}>
-                  <option value="rating">Rating</option>
-                  <option value="cost">Cost</option>
-                </select>
-              </div>
-              <p>{this.state.operation}</p>
-              <hr></hr>
         </header>
+        <br></br>
 
         <main>
+          <p className="progress_msg">{this.state.operation}</p>
             <div>
+              <p hidden={false} className="number__results">There are <span>{this.state.noOfResults}</span> total matches</p>
               { results.map(function(resultObj, index) {
                 let item = resultObj.restaurant
-
                 return (
-                <div className="row" key={index}>
-                  <div className="image">
-                    <img src={item.thumb} />
+                  <div className="row" key={index}>
+                    <div className="image">
+                      <img src={item.thumb} />
+                    </div>
+                    <div className="details">
+                      <p>Name: <span>{item.name}</span></p>
+                      <p>Cuisine: <span>{item.cuisines}</span></p>
+                      <p>Rating: <span>{item.user_rating.aggregate_rating}</span></p>
+                      <p>Votes: <span>{item.user_rating.votes}</span></p>
+                      <p>Locality: <span>{item.location.locality}</span></p>
+                      <p>Address: <span>{item.location.address}</span></p>
+                    </div>
                   </div>
-                  <div className="details">
-                    <p>Name: <span>{item.name}</span></p>
-                    <p>Cuisine: <span>{item.cuisines}</span></p>
-                    <p>Rating: <span>{item.user_rating.aggregate_rating}</span></p>
-                    <p>Votes: <span>{item.user_rating.votes}</span></p>
-                    <p>Locality: <span>{item.location.locality}</span></p>
-                    <p>Address: <span>{item.location.address}</span></p>
-                  </div>
-                </div>
                   )
               })
             }
