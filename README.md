@@ -1,6 +1,10 @@
 # Find my fodder
 
 ```
+### GitHub pages
+https://roscolil.github.io/find_me_fodder/
+
+### GitHub repo
 https://github.com/roscolil/find_me_fodder
 
 ```
