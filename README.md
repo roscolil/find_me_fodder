@@ -26,4 +26,5 @@ When the search button is clicked it sends the app obtains current position and 
 
 ## Things to improve
 * Splash screen while loading results
+* Append additional search results or use infinite scrolling
 * Refactor code for separate/reusable components
