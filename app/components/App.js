@@ -112,8 +112,8 @@ export default class App extends React.Component {
         </header>
 
         <main>
-            <div>
-              <p className="number__results" style={{
+            <div className="search__results">
+              <p className="number__of__results" style={{
                   visibility: this.state.noOfResults === 0 ? 'hidden' : 'visible'
                 }}>There are <span>{this.state.noOfResults}</span> total matches</p>
               { results.map(function(resultObj, index) {

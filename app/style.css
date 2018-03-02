@@ -29,6 +29,11 @@ main {
   color: white;
 }
 
+/* .search__results {
+  background-color: black;
+  opacity: 0.5;
+} */
+
 .header__div {
   width: 400px;
 }
@@ -41,7 +46,7 @@ main {
   margin: 5px 0 15px 0;
 }
 
-.number__results {
+.number__of__results {
   font-size: 20px;
   font-weight: bold;
   margin-left: 50px;

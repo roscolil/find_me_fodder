@@ -19,12 +19,19 @@ When the search button is clicked it sends the app obtains current position and 
 
 ## Technology used:
 * Webpack-react-starter boilerplate
-* Milligram css library
+* Milligram css library (with flex box)
 * Axios HTTP client
 * Zomato developer API
 * Chrome geolocation API
 
 ## Things to improve
 * Splash screen while loading results
+* Option to sort ascending/descending
 * Append additional search results or use infinite scrolling
 * Refactor code for separate/reusable components
+
+## Lessons learned
+* Building react components
+* The process of how react sets state and re-renders page elements
+* Ways to, or libraries that, make app responsive for mobile
+* How many breeds of cows there are
